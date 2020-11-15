@@ -1,23 +1,24 @@
 #!/bin/bash
+# jointly call germline variants for a set of samples
+
 # sbatch command
 # sbatch -J germ_vcf -p campus-new -c 10 -t 7-12 --output log-%j.out --error error-%j.out 3_merge_germ_gvcf.sh
-# squeue -u twang23
+# squeue -u username
 # scancel jobID
 
-infolder="/fh/fast/grady_w/users/twang23/halberg/process"
-outfolder="/fh/fast/grady_w/users/twang23/halberg/process/merge/germline"
-genomicsdb="/fh/fast/grady_w/users/twang23/halberg/process/genomicsdb"
-tmpfolder="/fh/fast/grady_w/users/twang23/halberg/process/tmp"
-#intervals="/fh/fast/grady_w/users/twang23/Data/gatk_resource_b37/Broad.human.exome.b37.interval_list"
-samplemap="/fh/fast/grady_w/users/twang23/halberg/process/merge/germline/file_germ.gvcf.map"
-refgenome="/fh/fast/grady_w/users/twang23/Data/gatk_resource_hg38/Homo_sapiens_assembly38.fasta"
-vcfHapmap="/fh/fast/grady_w/users/twang23/Data/gatk_resource_hg38/hapmap_3.3.hg38.vcf.gz"
-vcfOmni="/fh/fast/grady_w/users/twang23/Data/gatk_resource_hg38/1000G_omni2.5.hg38.vcf.gz"
-vcfGlk="/fh/fast/grady_w/users/twang23/Data/gatk_resource_hg38/1000G_phase1.snps.high_confidence.hg38.vcf.gz"
-vcfDbsnp="/fh/fast/grady_w/users/twang23/Data/gatk_resource_hg38/Homo_sapiens_assembly38.dbsnp138.vcf.gz"
-vcfMills="/fh/fast/grady_w/users/twang23/Data/gatk_resource_hg38/Mills_and_1000G_gold_standard.indels.hg38.vcf.gz"
-vcfAxiom="/fh/fast/grady_w/users/twang23/Data/gatk_resource_hg38/Axiom_Exome_Plus.genotypes.all_populations.poly.hg38.vcf.gz"
-regions="/fh/fast/grady_w/users/twang23/Data/gatk_resource_hg38/S31285117_Regions_GRCh38.bed"
+infolder="path-to-previous-outputs"
+outfolder="path-to/merge/germline"
+genomicsdb="path-to/genomicsdb"
+tmpfolder="path-to/tmp"
+samplemap="path-to/merge/germline/file_germ.gvcf.map" # manually generate this mapping file
+refgenome="path-to/gatk_resource_hg38/Homo_sapiens_assembly38.fasta"
+vcfHapmap="path-to/gatk_resource_hg38/hapmap_3.3.hg38.vcf.gz"
+vcfOmni="path-to/gatk_resource_hg38/1000G_omni2.5.hg38.vcf.gz"
+vcfGlk="path-to/gatk_resource_hg38/1000G_phase1.snps.high_confidence.hg38.vcf.gz"
+vcfDbsnp="path-to/gatk_resource_hg38/Homo_sapiens_assembly38.dbsnp138.vcf.gz"
+vcfMills="path-to/gatk_resource_hg38/Mills_and_1000G_gold_standard.indels.hg38.vcf.gz"
+vcfAxiom="path-to/gatk_resource_hg38/Axiom_Exome_Plus.genotypes.all_populations.poly.hg38.vcf.gz"
+regions="path-to/gatk_resource_hg38/S31285117_Regions_GRCh38.bed"
 
 module load GATK/4.1.8.1-GCCcore-8.3.0-Java-11
 
