@@ -1,4 +1,5 @@
 #!/bin/bash
+# First Fastqc then Multiqc to summarize QC results
 
 # sbatch command
 # sbatch -J qc --partition=campus-new -c 4 -t 2-12 --output log-%j.out --error error-%j.out ./qc.sh
