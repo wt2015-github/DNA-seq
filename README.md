@@ -2,6 +2,10 @@
 
 Analysis of Whole Exome (or Whole Genome) DNA-seq data to call germline and somatic variants from individual samples (not paired tumor-normal samples) using GATK (4.1.8.1) pipelines
 
+* *HaplotypeCaller* pipeline for germline variants
+
+* *Mutect2* pipeline for somatic variants
+
 ## Reference genome and variant data can be downloaded from GATK
 
 [GATK resource bundle](https://gatk.broadinstitute.org/hc/en-us/articles/360035890811-Resource-bundle)
