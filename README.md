@@ -1,10 +1,10 @@
 # DNA-seq
 
-Analysis of Whole Exome (or Whole Genome) DNA-seq data to call germline and somatic variants using GATK (4.1.8.1) pipelines
+Analysis of Whole Exome (or Whole Genome) DNA-seq data to call germline and somatic variants from individual samples (not paired tumor-normal samples) using GATK (4.1.8.1) pipelines
 
-## Reference genome and variant data can be downloaded from 
+## Reference genome and variant data can be downloaded from GATK
 
-* *run_RNAseq_STAR.RSEM.sh* includes QC, trimming, contamination screening, mapping, gene/isoform expression quantification, and summary steps.
+[GATK resource bundle](https://gatk.broadinstitute.org/hc/en-us/articles/360035890811-Resource-bundle) Google Cloud bucket for [hg38](https://console.cloud.google.com/storage/browser/genomics-public-data/resources/broad/hg38/v0/)
 
 * *callSNP_RNAseq.sh* is for SNP calling using the RNA-seq analysis results for each sample.
 
