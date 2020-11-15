@@ -1,4 +1,5 @@
 #!/bin/bash
+# call germline and somatic variants for each individual sample using GATK pipelines
 
 # sbatch command
 # sbatch -J ExomeSeq1 -p campus-new -c 6 -t 10-12 --output log-%j.out --error error-%j.out 2_process_batch1.sh
