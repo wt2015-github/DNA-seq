@@ -1,13 +1,14 @@
 #!/bin/bash
+# combining somatic variants for a set of samples, filtering and annotation
 
 # sbatch command
 # sbatch -J Soma_vcf -p campus-new -c 6 -t 4-12 --output log-%j.out --error error-%j.out 3_merge_soma_vcf.sh
 # squeue -u twang23
 # scancel jobID
 
-infolder="/fh/fast/grady_w/users/twang23/halberg/process"
-outfolder="/fh/fast/grady_w/users/twang23/halberg/process/merge/somatic"
-regions="/fh/fast/grady_w/users/twang23/Data/gatk_resource_hg38/S31285117_Regions_GRCh38.bed"
+infolder="path-to-previous-outputs"
+outfolder="path-to/merge/somatic"
+regions="path-to/gatk_resource_hg38/S31285117_Regions_GRCh38.bed"
 
 echo "=== merge vcf files of multiple samples into one ==="
 module load VCFtools/0.1.16-foss-2019b-Perl-5.30.0
