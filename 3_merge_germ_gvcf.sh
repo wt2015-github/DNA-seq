@@ -1,5 +1,5 @@
 #!/bin/bash
-# jointly call germline variants for a set of samples
+# jointly call germline variants for a set of samples, filtering and annotation
 
 # sbatch command
 # sbatch -J germ_vcf -p campus-new -c 10 -t 7-12 --output log-%j.out --error error-%j.out 3_merge_germ_gvcf.sh
