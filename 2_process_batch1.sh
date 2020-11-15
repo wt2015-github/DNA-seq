@@ -5,15 +5,15 @@
 # squeue -u username
 # scancel jobID
 
-fastqfolder="/fh/fast/grady_w/users/twang23/halberg/exome/wave1/fastq/batch1/"
-outfolder="/fh/fast/grady_w/users/twang23/halberg/process/batch1"
+fastqfolder="path-to-fastqs"
+outfolder="path-to-output"
 adapters="/app/software/Trimmomatic/0.39-Java-11/adapters/TruSeq3-PE-2.fa"
-refgenome="/fh/fast/grady_w/users/twang23/Data/gatk_resource_hg38/Homo_sapiens_assembly38.fasta"
-dbsnp="/fh/fast/grady_w/users/twang23/Data/gatk_resource_hg38/Homo_sapiens_assembly38.dbsnp138.vcf.gz"
-vcfGlk="/fh/fast/grady_w/users/twang23/Data/gatk_resource_hg38/1000G_phase1.snps.high_confidence.hg38.vcf.gz"
-germlineresource="/fh/fast/grady_w/users/twang23/Data/Mutect2_data/hg38/af-only-gnomad.hg38.vcf.gz"
-ponvcf="/fh/fast/grady_w/users/twang23/Data/Mutect2_data/hg38/1000g_pon.hg38.vcf.gz"
-germlinecommon="/fh/fast/grady_w/users/twang23/Data/Mutect2_data/hg38/small_exac_common_3.hg38.vcf.gz"
+refgenome="path-to/gatk_resource_hg38/Homo_sapiens_assembly38.fasta"
+dbsnp="path-to/gatk_resource_hg38/Homo_sapiens_assembly38.dbsnp138.vcf.gz"
+vcfGlk="path-to/gatk_resource_hg38/1000G_phase1.snps.high_confidence.hg38.vcf.gz"
+germlineresource="path-to/Mutect2_data/hg38/af-only-gnomad.hg38.vcf.gz"
+ponvcf="path-to/Mutect2_data/hg38/1000g_pon.hg38.vcf.gz"
+germlinecommon="/path-to/Mutect2_data/hg38/small_exac_common_3.hg38.vcf.gz"
 
 fastq_files=(`find ${fastqfolder} -maxdepth 1 -name "*.fastq.gz" -type f | sort`)
 for ((i=0; i<${#fastq_files[@]}; i+=2)); do
@@ -38,7 +38,6 @@ for ((i=0; i<${#fastq_files[@]}; i+=2)); do
 		gatk --java-options "-Xmx20G -XX:+UseParallelGC -XX:ParallelGCThreads=${SLURM_JOB_CPUS_PER_NODE}" BaseRecalibrator -R ${refgenome} -I ${outfolder}/${subfolder}/${subfolder}.sorted.markDup.bam --known-sites ${dbsnp} --known-sites ${vcfGlk} -O ${outfolder}/${subfolder}/${subfolder}.sorted.markDup.recal.table --tmp-dir ${outfolder}/${subfolder}/${subfolder}.tmp
 		gatk --java-options "-Xmx20G -XX:+UseParallelGC -XX:ParallelGCThreads=${SLURM_JOB_CPUS_PER_NODE}" ApplyBQSR -R ${refgenome} -I ${outfolder}/${subfolder}/${subfolder}.sorted.markDup.bam --bqsr-recal-file ${outfolder}/${subfolder}/${subfolder}.sorted.markDup.recal.table -O ${outfolder}/${subfolder}/${subfolder}.sorted.markDup.recal.bam --tmp-dir ${outfolder}/${subfolder}/${subfolder}.tmp
 		echo "=== call somatic variants for sample ${subfolder} ==="
-		module load GATK/4.1.8.1-GCCcore-8.3.0-Java-11
 		gatk --java-options "-Xmx20G -XX:+UseParallelGC -XX:ParallelGCThreads=${SLURM_JOB_CPUS_PER_NODE}" Mutect2 -R ${refgenome} -I ${outfolder}/${subfolder}/${subfolder}.sorted.markDup.recal.bam -O ${outfolder}/${subfolder}/${subfolder}.soma.vcf.gz --f1r2-tar-gz ${outfolder}/${subfolder}/${subfolder}.f1r2.tar.gz --germline-resource ${germlineresource} --panel-of-normals ${ponvcf} --native-pair-hmm-threads ${SLURM_JOB_CPUS_PER_NODE} --tmp-dir ${outfolder}/${subfolder}/${subfolder}.tmp
 		echo "=== learn read orientation model for sample ${subfolder} ==="
 		gatk --java-options "-Xmx20G -XX:+UseParallelGC -XX:ParallelGCThreads=${SLURM_JOB_CPUS_PER_NODE}" LearnReadOrientationModel -I ${outfolder}/${subfolder}/${subfolder}.f1r2.tar.gz -O ${outfolder}/${subfolder}/${subfolder}.readOrientationModel.tar.gz --tmp-dir ${outfolder}/${subfolder}/${subfolder}.tmp
