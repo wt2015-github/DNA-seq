@@ -2,9 +2,9 @@
 
 Analysis of Whole Exome (or Whole Genome) DNA-seq data to call germline and somatic variants from individual samples (not paired tumor-normal samples) using GATK (4.1.8.1) pipelines
 
-* [*HaplotypeCaller*](https://gatk.broadinstitute.org/hc/en-us/articles/360035535932-Germline-short-variant-discovery-SNPs-Indels-) pipeline for germline variants
+* [HaplotypeCaller](https://gatk.broadinstitute.org/hc/en-us/articles/360035535932-Germline-short-variant-discovery-SNPs-Indels-) pipeline for germline variants
 
-* [*Mutect2*](https://gatk.broadinstitute.org/hc/en-us/articles/360035894731-Somatic-short-variant-discovery-SNVs-Indels-) pipeline for somatic variants
+* [Mutect2](https://gatk.broadinstitute.org/hc/en-us/articles/360035894731-Somatic-short-variant-discovery-SNVs-Indels-) pipeline for somatic variants
 
 ## Reference genome and variant data can be downloaded from GATK
 
